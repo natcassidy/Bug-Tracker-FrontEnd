@@ -1,23 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./Components/Header"
+import Sidebar from "./Components/Sidebar"
+import TicketItems from "./Components/TicketItems"
+// import itemsDoc from "./items"
+import { useState, useEffect } from 'react';
 
 function App() {
+  // const [items, setItems] = useState([])
+
+  // useEffect(() => {
+  //   setItems(prevItems => [
+  //     ...prevItems, itemsDoc
+  //   ])
+  // })
+
+  const arr = [
+    {
+        title: "New Board",
+        priority: "Low",
+        id: 1
+    },
+    {
+        title: "New Board",
+        priority: "Low",
+        id: 2
+    },
+    {
+        title: "New Board",
+        priority: "Low",
+        id: 3
+    }
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header">
+        <Header />
+      </div>
+      <div className="sidebar">
+        <Sidebar />
+      </div>
+      <div className="list">
+        <TicketItems tickets={arr}/>
+      </div>
     </div>
   );
 }
