@@ -7,7 +7,9 @@ const TicketItems = ({tickets}) => {
         </li>
     )) 
     return (
-        {ticketsDisplay}
+        <ul>
+            {ticketsDisplay}
+        </ul>        
     )
 }
 

@@ -1,3 +1,5 @@
+import '../Styles/Item.css';
+
 const Item = ({title, priority}) => {
     return (
         <div className="item">

@@ -19,3 +19,11 @@
   grid-area: sidebar;
   height: 100%;
 }
+
+.main {
+  grid-area: main;
+}
+
+ul {
+  list-style-type: none;
+}

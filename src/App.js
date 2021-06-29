@@ -6,7 +6,7 @@ import TicketItems from "./Components/TicketItems"
 import { useState, useEffect } from 'react';
 
 function App() {
-  // const [items, setItems] = useState([])
+  const [displayList, setDisplayList] = useState(true)
 
   // useEffect(() => {
   //   setItems(prevItems => [
@@ -17,20 +17,25 @@ function App() {
   const arr = [
     {
         title: "New Board",
-        priority: "Low",
+        priority: "High",
         id: 1
     },
     {
-        title: "New Board",
-        priority: "Low",
-        id: 2
+      title: "New Board",
+      priority: "High",
+      id: 1
     },
     {
-        title: "New Board",
-        priority: "Low",
-        id: 3
+      title: "New Board",
+      priority: "High",
+      id: 1
     }
   ]
+
+  //display list ticket item
+  const onClickListItem = (e) => {
+
+  }
 
   return (
     <div className="App">
@@ -40,7 +45,7 @@ function App() {
       <div className="sidebar">
         <Sidebar />
       </div>
-      <div className="list">
+      <div className="main">
         <TicketItems tickets={arr}/>
       </div>
     </div>
