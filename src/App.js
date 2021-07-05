@@ -3,39 +3,38 @@ import Header from "./Components/Header"
 import Sidebar from "./Components/Sidebar"
 import TicketItems from "./Components/TicketItems"
 import Ticket from "./Components/Ticket"
-// import itemsDoc from "./items"
 import { useState, useEffect } from 'react';
 
 function App() {
   const [displayList, setDisplayList] = useState(true)
+  const [ticketId, setTicketId] = useState(-1);
 
-  // useEffect(() => {
-  //   setItems(prevItems => [
-  //     ...prevItems, itemsDoc
-  //   ])
-  // })
 
   const arr = [
     {
-        title: "New Board",
+        title: "1",
         priority: "High",
-        id: 1
+        id: 0
     },
     {
-      title: "New Board",
+      title: "2",
       priority: "High",
       id: 1
     },
     {
-      title: "New Board",
+      title: "3",
       priority: "High",
-      id: 1
+      id: 2
     }
   ]
 
-  //display list ticket item
-  const onClickListItem = (e) => {
+  const onClickListItem = (id) => {
+    setTicketId(id)
+    setDisplayList(false)
+  }
 
+  const onClickGoBack = () => {
+    setDisplayList(true)
   }
 
   return (
@@ -47,10 +46,20 @@ function App() {
         <Sidebar />
       </div>
       <div className="main">
-        <TicketItems tickets={arr}/>
+        
+        {displayList ? <TicketItems tickets={arr} onClickListItem={onClickListItem} /> : <Ticket item={arr[ticketId]} onClickGoBack={onClickGoBack} />}
       </div>
     </div>
   );
 }
 
 export default App;
+
+/** 
+ * TODO
+ * 
+ * Make entire box clickable
+ * Make way to delete ticket
+ * Make way to add ticket
+ * 
+ */
