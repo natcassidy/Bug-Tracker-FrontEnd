@@ -2,6 +2,7 @@ import './App.css';
 import Header from "./Components/Header"
 import Sidebar from "./Components/Sidebar"
 import TicketItems from "./Components/TicketItems"
+import Ticket from "./Components/Ticket"
 // import itemsDoc from "./items"
 import { useState, useEffect } from 'react';
 
