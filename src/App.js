@@ -48,6 +48,13 @@ function App() {
     setTickets([...currentTickets, ticket])
   }
 
+  const deleteTicket = (ticketId) => {
+    const newTickets = tickets.filter(ticket => {
+      return ticket.id != ticketId
+    })
+    setTickets(newTickets)
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -58,7 +65,7 @@ function App() {
       </div>
       <div className="main">
         
-        {displayList ? <TicketItems tickets={tickets} onClickListItem={onClickListItem} /> : <Ticket item={tickets[ticketId]} onClickGoBack={onClickGoBack} />}
+        {displayList ? <TicketItems tickets={tickets} onClickListItem={onClickListItem} /> : <Ticket item={tickets[ticketId]} onClickGoBack={onClickGoBack} deleteTicket={deleteTicket}/>}
         <NewTicket createNewTicket={createNewTicket} />
       </div>
     </div>
@@ -70,6 +77,7 @@ export default App;
 /** 
  * TODO
  * 
+ * When ticket is deleted, default back to main screen, or display ticket gone screen
  * Make way to delete ticket
  * Add in input checking to ensure valid inputs
  * Make sure ticket prioritys are uniform
