@@ -52,6 +52,7 @@ function App() {
     const newTickets = tickets.filter(ticket => {
       return ticket.id != ticketId
     })
+    setDisplayList(true)
     setTickets(newTickets)
   }
 
@@ -64,8 +65,8 @@ function App() {
         <Sidebar />
       </div>
       <div className="main">
-        
-        {displayList ? <TicketItems tickets={tickets} onClickListItem={onClickListItem} /> : <Ticket item={tickets[ticketId]} onClickGoBack={onClickGoBack} deleteTicket={deleteTicket}/>}
+        {displayList ? <TicketItems tickets={tickets} onClickListItem={onClickListItem} /> 
+        : <Ticket item={tickets[ticketId]} onClickGoBack={onClickGoBack} deleteTicket={deleteTicket} />}
         <NewTicket createNewTicket={createNewTicket} />
       </div>
     </div>
