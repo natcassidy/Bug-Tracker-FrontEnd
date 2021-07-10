@@ -1,12 +1,30 @@
 
 
-const Ticket = ({item, onClickGoBack, deleteTicket}) => {
+const Ticket = ({item, onClickGoBack, deleteTicket, archiveTicket, reactivateTicket}) => {
+
+    const active = (
+        <>
+            <h1>This is ticket # {item.id + 1}</h1>
+            <h1>Current Status {item.status}</h1>
+            <button onClick={() => deleteTicket(item.id)}>Delete</button>
+            <button onClick={() => archiveTicket(item.id)}>Archive</button>
+            <button onClick={() => onClickGoBack()}>Back</button>
+        </>
+    )
+
+    const archived = (
+        <>
+            <h1>This is ticket # {item.id + 1}</h1>
+            <h1>Current Status {item.status}</h1>
+            <button onClick={() => deleteTicket(item.id)}>Delete</button>
+            <button onClick={() => reactivateTicket(item.id)}>Reactivate</button>
+            <button onClick={() => onClickGoBack()}>Back</button>
+        </>
+    )
     
     return (
         <>
-            <h1>This is ticket # {item.id + 1}</h1>
-            <button onClick={() => deleteTicket(item.id)}>Delete</button>
-            <button onClick={() => onClickGoBack()}>Back</button>
+            {item.status === "Active" ? active : archived}
         </>     
     )
 }
