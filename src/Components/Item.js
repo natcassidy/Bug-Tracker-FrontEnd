@@ -1,6 +1,6 @@
 import '../Styles/Item.css';
 
-const Item = ({title, priority, onClickListItem, id, onClickGoBack}) => {
+const Item = ({title, priority, onClickListItem, id}) => {
     return (
         <div className="item" onClick={() => onClickListItem(id)}>
             <p>{title}</p>
