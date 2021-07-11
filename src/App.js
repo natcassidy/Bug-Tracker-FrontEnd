@@ -13,12 +13,14 @@ function App() {
     title: "This is archived",
     priority: "High",
     id: 0,
+    description: "This is where the description goes.",
     status: "Closed"
   }])
   const [tickets, setTickets] = useState([{
       title: "This is active",
       priority: "High",
       id: 0,
+      description: "This is where the description goes.",
       status: "Active"
     }
   ])
@@ -54,12 +56,13 @@ function App() {
     setDisplayList(true)
   }
 
-  const createNewTicket = (ticketTitle, ticketPriority) => {
+  const createNewTicket = (ticketTitle, ticketPriority, ticketDescription) => {
     console.log('create new ticket id: ' + ticketId)
     const ticket = {
       title : ticketTitle,
       priority : ticketPriority,
       id: ticketId,
+      description: ticketDescription,
       status: "Active"
     }
     let newId = ticketId + 1
@@ -147,7 +150,7 @@ export default App;
 /** 
  * TODO
  * 
- * Create Ticket Boards
+ * 
  * Add in input checking to ensure valid inputs
  * Make a way to complete a task
  * Make a way to archive a completed task
