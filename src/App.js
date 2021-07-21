@@ -170,8 +170,7 @@ export default App;
  */
 
 /**
- * Breakdown of Boards:
- * Main board has state for main tickets
- * Make function that selects the ticket, removes from main board and adds to 
- * array containing archived ticket
+ * TODO NEXT
+ * 
+ * Ensure Axios can push and grab data from server
  */
