@@ -28,11 +28,17 @@ function App() {
   const [ticketId, setTicketId] = useState(tickets.length)
   const [findTicketId, setFindTicketId] = useState(-1)
 
-  //This needs to be used when using the db
+  
   useEffect(() => {
-    // setTicketId(tickets.length)
-    // console.log('ticket id created: ' + ticketId)
-    // console.log('ticket length' + tickets.length)
+    axios.get("http://localhost:8080/tickets",{
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }}).then(response => {
+      let ticketsImport = response.data
+      console.log('tickets: ' + ticketsImport)
+    })  
   }, [])
 
   const onClickListItem = (id) => {
