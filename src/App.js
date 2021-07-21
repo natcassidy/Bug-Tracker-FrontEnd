@@ -5,6 +5,7 @@ import TicketItems from "./Components/TicketItems"
 import Ticket from "./Components/Ticket"
 import { useState, useEffect } from 'react';
 import NewTicket from './Components/NewTicket';
+import axios from 'axios'
 
 function App() {
   const [displayList, setDisplayList] = useState(true)
@@ -151,29 +152,20 @@ export default App;
  * TODO
  * 
  * 
- * Add in input checking to ensure valid inputs
- * Make a way to complete a task
- * Make a way to archive a completed task
+ * New screen for ticket creation
  * Make a way to edit a ticket
+ * Make a way to assign ticket
+ * Make a way to leave notes on tickets
  * Add more details to tickets such as user, more info, date
+ * Add in input checking to ensure valid inputs
  * Sort tickets
  * When connecting DB make sure to adjust the tickID function to pull after data is imported
  * 
  */
 
 /**
- * 
- * TODO Archived Tickets Board
- * Add way to select board you are looking at
- * Add a button on the ticket screen to move to archive when on main board
- * Add a button on ticket screen to move back to main ticket board
- * Add Status to each ticket
- * 
  * Breakdown of Boards:
  * Main board has state for main tickets
  * Make function that selects the ticket, removes from main board and adds to 
- * array containing archived tickets
- * 
- * my search functionality for archived tickets needs to be updated for both boards
- * add to ticket screen the new function for dsiplaying tciket
+ * array containing archived ticket
  */
