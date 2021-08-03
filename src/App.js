@@ -30,14 +30,9 @@ function App() {
 
   
   useEffect(() => {
-    axios.get("http://localhost:8080/tickets",{
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    }}).then(response => {
-      let ticketsImport = response.data
-      console.log('tickets: ' + ticketsImport)
+    axios
+      .get("http://localhost:8080/tickets").then(response => {
+        console.log('data: ', response.data[0])
     })  
   }, [])
 
