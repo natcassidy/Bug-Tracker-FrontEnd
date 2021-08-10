@@ -5,6 +5,8 @@ const Ticket = ({item, onClickGoBack, deleteTicket, archiveTicket, reactivateTic
     const active = (
         <>
             <h1>This is ticket # {item.id + 1}</h1>
+            <h4>Title:</h4>
+            {item.name}
             <h4>Description:</h4>
             {item.description}
             <h1>Current Status {item.status}</h1>

@@ -6,7 +6,7 @@ const NewTicket = ({createNewTicket}) => {
     const [description, setDescription] = useState("")
 
     const handleTitle = (e) => {
-        let newTitle = e.target.value
+        let newTitle = String(e.target.value)
         setTitle(newTitle)
     }
 

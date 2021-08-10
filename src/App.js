@@ -10,31 +10,29 @@ import axios from 'axios'
 function App() {
   const [displayList, setDisplayList] = useState(true)
   const [displayBoard, setDisplayBoard] = useState("active")
-  const [archivedTickets, setArchivedTickets] = useState([{
-    title: "This is archived",
-    priority: "High",
-    id: 0,
-    description: "This is where the description goes.",
-    status: "Closed"
-  }])
-  const [tickets, setTickets] = useState([{
-      title: "This is active",
-      priority: "High",
-      id: 0,
-      description: "This is where the description goes.",
-      status: "Active"
-    }
-  ])
-  const [ticketId, setTicketId] = useState(tickets.length)
+  const [archivedTickets, setArchivedTickets] = useState([])
+  const [tickets, setTickets] = useState([])
   const [findTicketId, setFindTicketId] = useState(-1)
+  const [newTicketSessionCount, setNewTicketSessionCount] = useState(0)
 
   
   useEffect(() => {
     axios
       .get("http://localhost:8080/tickets").then(response => {
-        console.log('data: ', response.data[0])
+        let ticketsFromServer = response.data
+        console.log('data: ', ticketsFromServer)
+        setTickets(ticketsFromServer)
     })  
   }, [])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/tickets").then(response => {
+        let ticketsFromServer = response.data
+        console.log('data: ', ticketsFromServer)
+        setTickets(ticketsFromServer)
+    }) 
+  }, [newTicketSessionCount])
 
   const onClickListItem = (id) => {
     console.log('inside onClickListItem: id received' + id)
@@ -59,19 +57,17 @@ function App() {
   }
 
   const createNewTicket = (ticketTitle, ticketPriority, ticketDescription) => {
-    console.log('create new ticket id: ' + ticketId)
     const ticket = {
-      title : ticketTitle,
-      priority : ticketPriority,
-      id: ticketId,
+      name : ticketTitle,
       description: ticketDescription,
+      priority : ticketPriority,
       status: "Active"
     }
-    let newId = ticketId + 1
-    setTicketId(newId)
-    console.log('ticket id new: ' + ticketId)
-    const currentTickets = tickets
-    setTickets([...currentTickets, ticket])
+
+    axios.post("http://localhost:8080/tickets", ticket).then(response => {
+      console.log("response from ticket creation: ", response.data)
+      setNewTicketSessionCount(prev => prev + 1)
+    })
   }
 
   const deleteTicket = (ticketIdToRemove) => {
@@ -167,5 +163,8 @@ export default App;
 /**
  * TODO NEXT
  * 
- * Ensure Axios can push and grab data from server
+ * Figure out how to remove ticketID 0 from server
+ * Delete ticket button in react
+ * archive ticket from server
+ * 
  */
