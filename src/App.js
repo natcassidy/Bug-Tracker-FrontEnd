@@ -31,6 +31,8 @@ function App() {
         let ticketsFromServer = response.data
         console.log('data: ', ticketsFromServer)
         setTickets(ticketsFromServer)
+
+        //potentially call a function that checks if tickets should be displayed
     }) 
   }, [newTicketSessionCount])
 
@@ -71,12 +73,19 @@ function App() {
   }
 
   const deleteTicket = (ticketIdToRemove) => {
-    const newTickets = tickets.filter(ticket => {
-      return ticket.id !== ticketIdToRemove
+    /**
+       * Sets ticket to empty list so that the deleted ticket doesnt display
+       * for a brief moment between the server fetching the new list
+       */
+    setTickets([])
+    setDisplayList(true) 
+
+    axios.delete(`http://localhost:8080/tickets/${ticketIdToRemove}`).then(response => {
+       
+      console.log("response from ticket removal: ", response.data)
+      setNewTicketSessionCount(prev => prev + 1)
+      
     })
-    setDisplayList(true)
-    setTickets(newTickets)
-    console.log('tickets: ' + tickets)
   }
 
   const archiveTicket = (id) => {
@@ -163,8 +172,13 @@ export default App;
 /**
  * TODO NEXT
  * 
- * Figure out how to remove ticketID 0 from server
- * Delete ticket button in react
  * archive ticket from server
  * 
+ */
+
+
+/**
+ * Potential Errors
+ * 
+ * Delete Ticket, when deleting it remove tickets from list, if there is a server error, no tickets display
  */

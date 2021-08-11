@@ -4,7 +4,7 @@ const Ticket = ({item, onClickGoBack, deleteTicket, archiveTicket, reactivateTic
 
     const active = (
         <>
-            <h1>This is ticket # {item.id + 1}</h1>
+            <h1>This is ticket # {item.id}</h1>
             <h4>Title:</h4>
             {item.name}
             <h4>Description:</h4>
