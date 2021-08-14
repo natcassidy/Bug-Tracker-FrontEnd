@@ -17,23 +17,18 @@ function App() {
 
   
   useEffect(() => {
+    setTickets([])
+    setArchivedTickets([])
     axios
       .get("http://localhost:8080/tickets").then(response => {
-        let ticketsFromServer = response.data
-        console.log('data: ', ticketsFromServer)
-        setTickets(ticketsFromServer)
+        response.data.forEach(ticket => {
+          if(ticket.status === "Active") {
+            setTickets(oldTickets => [...oldTickets, ticket])
+          } else if(ticket.status === "Archived") {
+            setArchivedTickets(oldTickets => [...oldTickets, ticket])
+          }
+        })
     })  
-  }, [])
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/tickets").then(response => {
-        let ticketsFromServer = response.data
-        console.log('data: ', ticketsFromServer)
-        setTickets(ticketsFromServer)
-
-        //potentially call a function that checks if tickets should be displayed
-    }) 
   }, [newTicketSessionCount])
 
   const onClickListItem = (id) => {
@@ -67,7 +62,6 @@ function App() {
     }
 
     axios.post("http://localhost:8080/tickets", ticket).then(response => {
-      console.log("response from ticket creation: ", response.data)
       setNewTicketSessionCount(prev => prev + 1)
     })
   }
@@ -155,7 +149,7 @@ function App() {
 export default App;
 
 /** 
- * TODO
+ * TODO General
  * 
  * 
  * New screen for ticket creation
@@ -166,13 +160,18 @@ export default App;
  * Add in input checking to ensure valid inputs
  * Sort tickets
  * When connecting DB make sure to adjust the tickID function to pull after data is imported
+ * Search tickets
  * 
  */
 
 /**
  * TODO NEXT
  * 
- * archive ticket from server
+ * 
+ * When dealing with individual ticket the data should be from the server and not local
+ * Get rid of tickets state
+ * update ticket functionality
+ * Understand why UseEffect doesn't print out a list of tickets when i clog it, it might be due to the data dependency
  * 
  */
 
