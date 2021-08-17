@@ -11,7 +11,7 @@ const NewTicket = ({createNewTicket}) => {
     }
 
     const handleDescription = (e) => {
-        let newDescription = e.target.value
+        let newDescription = String(e.target.value)
         setDescription(newDescription)
     }
 

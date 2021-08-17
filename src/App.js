@@ -74,11 +74,29 @@ function App() {
     setTickets([])
     setDisplayList(true) 
 
-    axios.delete(`http://localhost:8080/tickets/${ticketIdToRemove}`).then(response => {
-       
+    axios.delete(`http://localhost:8080/tickets/${ticketIdToRemove}`).then(response => { 
       console.log("response from ticket removal: ", response.data)
       setNewTicketSessionCount(prev => prev + 1)
-      
+    })
+  }
+
+  const updateTicket = (ticketIdToUpdate, updateTitle, updateDescription) => {
+    /**
+       * Sets ticket to empty list so that the deleted ticket doesnt display
+       * for a brief moment between the server fetching the new list
+       */
+    setTickets([])
+    setDisplayList(true) 
+    
+    let ticketToUpdate = tickets.find(ticket => ticket.id === ticketIdToUpdate)
+    ticketToUpdate = {...ticketToUpdate,
+      name: updateTitle,
+      description: updateDescription
+    }
+
+    axios.put(`http://localhost:8080/tickets/${ticketIdToUpdate}`, ticketToUpdate).then(response => {
+      console.log("response from ticket update: ", response.data)
+      setNewTicketSessionCount(prev => prev + 1)
     })
   }
 
@@ -136,9 +154,9 @@ function App() {
         : <TicketItems tickets={archivedTickets} onClickListItem={onClickListItem} onClickListItemArchive={onClickListItemArchive}/>)
         : (displayBoard === "active" 
         ? <Ticket item={tickets[findTicketId]} onClickGoBack={onClickGoBack} 
-        deleteTicket={deleteTicket} archiveTicket={archiveTicket} reactivateTicket={reactivateTicket} />
+        deleteTicket={deleteTicket} archiveTicket={archiveTicket} reactivateTicket={reactivateTicket} updateTicket={updateTicket}/>
         : <Ticket item={archivedTickets[findTicketId]} onClickGoBack={onClickGoBack} 
-        deleteTicket={deleteTicket} archiveTicket={archiveTicket} reactivateTicket={reactivateTicket} />)}
+        deleteTicket={deleteTicket} archiveTicket={archiveTicket} reactivateTicket={reactivateTicket} updateTicket={updateTicket}/>)}
 
         <NewTicket createNewTicket={createNewTicket} />
       </div>
@@ -153,7 +171,6 @@ export default App;
  * 
  * 
  * New screen for ticket creation
- * Make a way to edit a ticket
  * Make a way to assign ticket
  * Make a way to leave notes on tickets
  * Add more details to tickets such as user, more info, date
@@ -161,6 +178,7 @@ export default App;
  * Sort tickets
  * When connecting DB make sure to adjust the tickID function to pull after data is imported
  * Search tickets
+ * Catch all handle chagen functions for state updates
  * 
  */
 
@@ -171,7 +189,6 @@ export default App;
  * When dealing with individual ticket the data should be from the server and not local
  * Get rid of tickets state
  * update ticket functionality
- * Understand why UseEffect doesn't print out a list of tickets when i clog it, it might be due to the data dependency
  * 
  */
 
